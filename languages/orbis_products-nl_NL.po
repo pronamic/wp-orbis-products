@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Orbis Deals\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/orbis-products\n"
 "POT-Creation-Date: 2015-02-16 10:40:56+00:00\n"
-"PO-Revision-Date: 2015-02-16 11:43+0100\n"
+"PO-Revision-Date: 2015-02-16 12:28+0100\n"
 "Last-Translator: K.Tolsma <kareljan@pronamic.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Producten"
 
 #: includes/post.php:14
 msgid "Add New"
-msgstr "Nieuwe deal"
+msgstr "Nieuw product"
 
 #: includes/post.php:15
 msgid "Add New Product"
