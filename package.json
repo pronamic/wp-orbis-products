@@ -1,0 +1,38 @@
+{
+  "name": "orbis-products",
+  "version": "1.0.0",
+  "description": "The Orbis Products plugin extends your Orbis environment with the option to add products.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wp-orbis/wp-orbis-products.git"
+  },
+  "keywords": [
+    "orbis",
+    "product",
+    "products"
+  ],
+  "author": {
+    "name": "Pronamic",
+    "email": "info@pronamic.nl",
+    "url": "http://www.pronamic.nl/"
+  },
+  "contributors": [
+    {
+      "name": "Karel-Jan Tolsma",
+      "email": "info@kareljantolsma.nl",
+      "url": "http://kareljantolsma.nl/"
+    }
+  ],
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/wp-orbis/wp-orbis-products/issues",
+    "email": "support@pronamic.nl"
+  },
+  "homepage": "https://github.com/wp-orbis/wp-orbis-products",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-phplint": "0.0.5",
+    "grunt-wp-i18n": "~0.4.0",
+    "grunt-checkwpversion": "~0.3.0"
+  }
+}
