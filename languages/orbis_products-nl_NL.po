@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Orbis Deals\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/orbis-deals\n"
-"POT-Creation-Date: 2014-03-05 14:59:01+00:00\n"
-"PO-Revision-Date: 2014-03-05 15:59+0100\n"
-"Last-Translator: Remco Tolsma <info@remcotolsma.nl>\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/orbis-products\n"
+"POT-Creation-Date: 2015-02-16 10:40:56+00:00\n"
+"PO-Revision-Date: 2015-02-16 11:43+0100\n"
+"Last-Translator: K.Tolsma <kareljan@pronamic.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
-"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
 "X-Poedit-KeywordsList: __;_e;_x:2c,1;esc_attr__\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -17,119 +17,68 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/meta-box-deal-details.php:15
-msgid "Company ID"
-msgstr "Bedrijf ID"
-
-#: admin/meta-box-deal-details.php:18
-msgid "Select Company"
-msgstr "Selecteer bedrijf"
-
-#: admin/meta-box-deal-details.php:23 includes/post.php:163
-#: templates/deal-details.php:28
+#: admin/meta-box-product-details.php:13
+#: templates/product-details.php:8
 msgid "Price"
 msgstr "Prijs"
 
-#: admin/meta-box-deal-details.php:31 includes/post.php:164
-#: templates/deal-details.php:33
-msgid "Status"
-msgstr "Status"
-
-#: includes/functions.php:10
-msgid "Pending"
-msgstr "In afwachting"
-
-#: includes/functions.php:11
-msgid "Won"
-msgstr "Gewonnen"
-
-#: includes/functions.php:12
-msgid "Lost"
-msgstr "Verloren"
-
-#: includes/post.php:10 includes/post.php:23
-msgid "Deals"
-msgstr "Deals"
+#: includes/post.php:10
+#: includes/post.php:23
+msgid "Products"
+msgstr "Producten"
 
 #: includes/post.php:14
 msgid "Add New"
 msgstr "Nieuwe deal"
 
 #: includes/post.php:15
-msgid "Add New Deal"
-msgstr "Nieuwe deal toevoegen"
+msgid "Add New Product"
+msgstr "Nieuw product"
 
 #: includes/post.php:16
-msgid "Edit Deal"
-msgstr "Deal bewerken"
+msgid "Edit Product"
+msgstr "Product bewerken"
 
 #: includes/post.php:17
-msgid "New Deal"
-msgstr "Nieuwe deal"
+msgid "New Product"
+msgstr "Nieuw product"
 
 #: includes/post.php:18
-msgid "View Deal"
-msgstr "Deal bekijken"
+msgid "View Product"
+msgstr "Bekijk product"
 
 #: includes/post.php:19
-msgid "Search Deals"
-msgstr "Deals zoeken"
+msgid "Search Products"
+msgstr "Producten zoeken"
 
 #: includes/post.php:20
-msgid "No deals found"
-msgstr "Geen deals gevonden"
+msgid "No products found"
+msgstr "Geen producten gevonden"
 
 #: includes/post.php:21
-msgid "No deals found in Trash"
-msgstr "Geen deals gevonden in de prullenbak"
+msgid "No products found in Trash"
+msgstr "Geen producten gevonden in de prullenbak"
 
 #: includes/post.php:22
-msgid "Parent Deals:"
-msgstr "Bovenliggende deal:"
+msgid "Parent Products:"
+msgstr "Bovenliggend producten:"
 
-#: includes/post.php:45 templates/deal-details.php:18
-msgid "Deal Details"
-msgstr "Deal details"
-
-#: includes/post.php:137
-msgid "The deal '%s' was marked '%s' by %s."
-msgstr "Deze deal '%s' was gemarkeerd als '%s' door %s."
-
-#: includes/post.php:161
-msgid "Title"
-msgstr "Titel"
-
-#: includes/post.php:162 templates/deal-details.php:23
-msgid "Company"
-msgstr "Bedrijf"
-
-#: includes/post.php:165
-msgid "Author"
-msgstr "Auteur"
-
-#: includes/post.php:166
-msgid "Comments"
-msgstr "Reacties"
-
-#: includes/post.php:167
-msgid "Date"
-msgstr "Datum"
+#: includes/post.php:45
+#: templates/product-details.php:3
+msgid "Product Details"
+msgstr "Product details"
 
 #. Plugin Name of the plugin/theme
-msgid "Orbis Deals"
-msgstr "Orbis deals"
+msgid "Orbis Products"
+msgstr "Orbis Products"
 
 #. Plugin URI of the plugin/theme
-msgid "http://www.happywp.com/plugins/orbis-deals/"
-msgstr "http://www.happywp.com/plugins/orbis-deals/"
+msgid "http://www.pronamic.eu/plugins/orbis-products/"
+msgstr "http://www.pronamic.eu/plugins/orbis-products/"
 
 #. Description of the plugin/theme
-msgid ""
-"The Orbis Deals plugin extends your Orbis environment with the option to add "
-"deals."
-msgstr ""
-"De Orbis deals plugin breidt je Orbis omgeving uit met de optie om deals toe "
-"te voegen."
+msgid "The Orbis Products plugin extends your Orbis environment with the option to add products."
+msgstr "De Orbis Products plugin breidt je Orbis omgeving uit met de optie om producten toe te voegen."
 
 #. Author of the plugin/theme
 msgid "Pronamic"
@@ -141,18 +90,96 @@ msgstr "http://www.pronamic.eu/"
 
 #: includes/post.php:12
 msgctxt "post type general name"
-msgid "Deals"
-msgstr "Deals"
+msgid "Products"
+msgstr "Producten"
 
 #: includes/post.php:13
 msgctxt "post type singular name"
-msgid "Deal"
-msgstr "Deal"
+msgid "Product"
+msgstr "Product"
 
 #: includes/post.php:31
 msgctxt "slug"
-msgid "deals"
-msgstr "deals"
+msgid "products"
+msgstr "producten"
+
+#~ msgid "Company ID"
+#~ msgstr "Bedrijf ID"
+
+#~ msgid "Select Company"
+#~ msgstr "Selecteer bedrijf"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Pending"
+#~ msgstr "In afwachting"
+
+#~ msgid "Won"
+#~ msgstr "Gewonnen"
+
+#~ msgid "Lost"
+#~ msgstr "Verloren"
+
+#~ msgid "Deals"
+#~ msgstr "Deals"
+
+#~ msgid "Add New Deal"
+#~ msgstr "Nieuwe deal toevoegen"
+
+#~ msgid "Edit Deal"
+#~ msgstr "Deal bewerken"
+
+#~ msgid "New Deal"
+#~ msgstr "Nieuwe deal"
+
+#~ msgid "View Deal"
+#~ msgstr "Deal bekijken"
+
+#~ msgid "Search Deals"
+#~ msgstr "Deals zoeken"
+
+#~ msgid "No deals found"
+#~ msgstr "Geen deals gevonden"
+
+#~ msgid "Parent Deals:"
+#~ msgstr "Bovenliggende deal:"
+
+#~ msgid "Deal Details"
+#~ msgstr "Deal details"
+
+#~ msgid "The deal '%s' was marked '%s' by %s."
+#~ msgstr "Deze deal '%s' was gemarkeerd als '%s' door %s."
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Company"
+#~ msgstr "Bedrijf"
+
+#~ msgid "Author"
+#~ msgstr "Auteur"
+
+#~ msgid "Comments"
+#~ msgstr "Reacties"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "Orbis Deals"
+#~ msgstr "Orbis deals"
+#~ msgctxt "post type general name"
+
+#~ msgid "Deals"
+#~ msgstr "Deals"
+#~ msgctxt "post type singular name"
+
+#~ msgid "Deal"
+#~ msgstr "Deal"
+#~ msgctxt "slug"
+
+#~ msgid "deals"
+#~ msgstr "deals"
 
 #~ msgid "Person"
 #~ msgstr "Persoon"
@@ -215,12 +242,12 @@ msgstr "deals"
 
 #~ msgid "Subscriptions"
 #~ msgstr "Abonnementen"
-
 #~ msgctxt "post type general name"
+
 #~ msgid "Subscriptions"
 #~ msgstr "Abonnementen"
-
 #~ msgctxt "post type singular name"
+
 #~ msgid "Subscription"
 #~ msgstr "Abonnement"
 
@@ -247,23 +274,23 @@ msgstr "deals"
 
 #~ msgid "Parent Subscription:"
 #~ msgstr "Bovenliggend abonnement"
-
 #~ msgctxt "slug"
+
 #~ msgid "subscriptions"
 #~ msgstr "abonnementen"
 
 #~ msgid "Subscription Products"
 #~ msgstr "Abonnement producten"
-
 #~ msgctxt "post type general name"
+
 #~ msgid "Subscription Products"
 #~ msgstr "Abonnement producten"
-
 #~ msgctxt "post type singular name"
+
 #~ msgid "Subscription Product"
 #~ msgstr "Abonnement product"
-
 #~ msgctxt "orbis_subs_type"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuw abonnement product"
 
@@ -290,11 +317,8 @@ msgstr "deals"
 
 #~ msgid "Parent Subscription Product:"
 #~ msgstr "Bovenliggend abonnement product:"
-
-#~ msgid "Products"
-#~ msgstr "Producten"
-
 #~ msgctxt "slug"
+
 #~ msgid "subscription-products"
 #~ msgstr "abonnement-producten"
 
@@ -387,9 +411,6 @@ msgstr "deals"
 
 #~ msgid "All"
 #~ msgstr "Alles"
-
-#~ msgid "Product"
-#~ msgstr "Product"
 
 #~ msgid "Active"
 #~ msgstr "Actief"
@@ -489,11 +510,13 @@ msgstr "deals"
 
 #, fuzzy
 #~ msgctxt "post type general name"
+
 #~ msgid "Subscription Types"
 #~ msgstr "Abonnement"
 
 #, fuzzy
 #~ msgctxt "post type singular name"
+
 #~ msgid "Subscription Type"
 #~ msgstr "Type"
 
@@ -587,8 +610,8 @@ msgstr "deals"
 
 #~ msgid "Search Keychains"
 #~ msgstr "Sleutelhangers zoeken"
-
 #~ msgctxt "slug"
+
 #~ msgid "keychains"
 #~ msgstr "sleutelhangers"
 
@@ -627,12 +650,12 @@ msgstr "deals"
 
 #~ msgid "Tags"
 #~ msgstr "Tags"
-
 #~ msgctxt "orbis_keychain_category"
+
 #~ msgid "Categories"
 #~ msgstr "Categorieën"
-
 #~ msgctxt "orbis_keychain_category"
+
 #~ msgid "Category"
 #~ msgstr "Categorie"
 
@@ -656,16 +679,16 @@ msgstr "deals"
 
 #~ msgid "New Category Name"
 #~ msgstr "Nieuwe categorie naam"
-
 #~ msgctxt "slug"
+
 #~ msgid "keychain-categorie"
 #~ msgstr "sleutelhanger-categorie"
-
 #~ msgctxt "orbis_keychain_category"
+
 #~ msgid "Tags"
 #~ msgstr "Tags"
-
 #~ msgctxt "orbis_keychain_category"
+
 #~ msgid "Tag"
 #~ msgstr "Tag"
 
@@ -680,8 +703,8 @@ msgstr "deals"
 
 #~ msgid "New Tag Name"
 #~ msgstr "Nieuwe tag naam"
-
 #~ msgctxt "slug"
+
 #~ msgid "keychain-tag"
 #~ msgstr "sleutelhanger-tag"
 
@@ -690,8 +713,8 @@ msgstr "deals"
 
 #~ msgid "Hosting Groups"
 #~ msgstr "Hosting groepen"
-
 #~ msgctxt "hosting_group"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuwe toevoegen"
 
@@ -703,8 +726,8 @@ msgstr "deals"
 
 #~ msgid "Domain Name"
 #~ msgstr "Domeinnaam"
-
 #~ msgctxt "domain_name"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuwe toevoegen"
 
@@ -716,47 +739,26 @@ msgstr "deals"
 
 #~ msgid "Project"
 #~ msgstr "Project"
-
 #~ msgctxt "orbis_project"
+
 #~ msgid "Add New"
-#~ msgstr "Nieuw project"
-
-#~ msgid "Add New Project"
-#~ msgstr "Nieuw project"
-
-#~ msgid "Edit Project"
-#~ msgstr "Project bewerken"
-
-#~ msgid "New Project"
 #~ msgstr "Nieuw project"
 
 #~ msgid "All Projects"
 #~ msgstr "Alle projecten"
-
-#~ msgid "View Project"
-#~ msgstr "Bekijk project"
-
-#~ msgid "Search Projects"
-#~ msgstr "Projecten zoeken"
-
-#~ msgid "No projects found."
-#~ msgstr "Geen projecten gevonden."
-
-#~ msgid "Parent Project:"
-#~ msgstr "Bovenliggend project:"
-
 #~ msgctxt "taxonomy general name"
+
 #~ msgid "Categories"
 #~ msgstr "Categorieën"
-
 #~ msgctxt "taxonomy singular name"
+
 #~ msgid "Category"
 #~ msgstr "Categorie"
 
 #~ msgid "Companies"
 #~ msgstr "Bedrijven"
-
 #~ msgctxt "orbis_company"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuw bedrijf"
 
@@ -783,20 +785,20 @@ msgstr "deals"
 
 #~ msgid "Parent Company:"
 #~ msgstr "Bovenliggend bedrijf:"
-
 #~ msgctxt "slug"
+
 #~ msgid "companies"
 #~ msgstr "bedrijven"
-
 #~ msgctxt "slug"
+
 #~ msgid "persons"
 #~ msgstr "personen"
-
 #~ msgctxt "taxonomy general name"
+
 #~ msgid "Genders"
 #~ msgstr "Geslachten"
-
 #~ msgctxt "taxonomy singular name"
+
 #~ msgid "Gender"
 #~ msgstr "Geslacht"
 
@@ -945,8 +947,8 @@ msgstr "deals"
 
 #~ msgid "Project invoice is paid"
 #~ msgstr "Project factuur is betaald"
-
 #~ msgctxt "project"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuw project"
 
@@ -961,11 +963,8 @@ msgstr "deals"
 
 #~ msgid "Request password."
 #~ msgstr "Verzoek wachtwoord."
-
-#~ msgid "Password Details"
-#~ msgstr "Wachtwoord details"
-
 #~ msgctxt "orbis_password"
+
 #~ msgid "Add New"
 #~ msgstr "Nieuwe toevoegen"
 
@@ -983,8 +982,8 @@ msgstr "deals"
 
 #~ msgid "No passwords found"
 #~ msgstr "Geen wachtwoorden gevonden"
-
 #~ msgctxt "slug"
+
 #~ msgid "passwords"
 #~ msgstr "wachtwoorden"
 
