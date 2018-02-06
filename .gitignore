@@ -1,3 +1,7 @@
+# Composer #
+############
+/vendor/
+
 # Compiled source #
 ###################
 *.com

@@ -17,5 +17,5 @@ function orbis_product_get_the_price() {
  * Echo the price.
  */
 function orbis_product_the_price() {
-	echo orbis_price( orbis_product_get_the_price() );
+	echo esc_html( orbis_price( orbis_product_get_the_price() ) );
 }

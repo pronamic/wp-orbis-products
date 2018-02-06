@@ -24,7 +24,7 @@ function orbis_products_bootstrap() {
 
 	// Initialize
 	global $orbis_products_plugin;
-	
+
 	$orbis_products_plugin = new Orbis_Products_Plugin( __FILE__ );
 }
 

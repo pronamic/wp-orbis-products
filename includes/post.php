@@ -29,7 +29,7 @@ function orbis_products_create_initial_post_types() {
 			'has_archive'   => true,
 			'rewrite'       => array(
 				'slug' => _x( 'products', 'slug', 'orbis_products' ),
-			)
+			),
 		)
 	);
 }
@@ -80,7 +80,7 @@ function orbis_save_product_details( $post_id, $post ) {
 	}
 
 	// Check permissions
-	if ( ! ( $post->post_type == 'orbis_product' && current_user_can( 'edit_post', $post_id ) ) ) {
+	if ( ! ( 'orbis_product' === $post->post_type && current_user_can( 'edit_post', $post_id ) ) ) {
 		return;
 	}
 
