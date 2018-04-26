@@ -1,4 +1,5 @@
 <?php
+use Pronamic\WordPress\Money\Money;
 
 /**
  * Return the price.
@@ -17,5 +18,6 @@ function orbis_product_get_the_price() {
  * Echo the price.
  */
 function orbis_product_the_price() {
-	echo esc_html( orbis_price( orbis_product_get_the_price() ) );
+	$price = new Money( orbis_product_get_the_price(), 'EUR' );
+	echo esc_html( $price->format_i18n() );
 }
