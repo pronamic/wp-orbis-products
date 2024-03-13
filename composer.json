@@ -9,6 +9,7 @@
         "plugin",
         "bootstrap"
     ],
+    "type": "wordpress-plugin",
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7",
         "wp-coding-standards/wpcs": "0.9.0"
