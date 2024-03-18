@@ -30,5 +30,15 @@
 		"pronamic/wp-coding-standards": "^2.1",
 		"pronamic/pronamic-cli": "^1.1"
 	},
-	"scripts": {}
+	"scripts": {
+		"build": "vendor/bin/pronamic wp-build",
+		"phpcs": "vendor/bin/phpcs",
+		"translate": [
+			"@build",
+			"rsync --recursive --delete --verbose ./build/project/languages/ ./languages/"
+		],
+		"qa": [
+			"@phpcs"
+		]
+	}
 }

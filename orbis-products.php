@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Orbis Products
- * Plugin URI:        https://wp.pronamic.directory/plugins/orbis-subscriptions/
+ * Plugin URI:        https://wp.pronamic.directory/plugins/orbis-products/
  * Description:       The Orbis Products plugin extends your Orbis environment with the option to add products.
  * Version:           1.0.0
  * Requires at least: 5.2
