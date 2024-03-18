@@ -1,18 +1,34 @@
 {
-    "name": "pronamic/wp-orbis-products",
-    "description": "The Orbis Products plugin extends your Orbis environment with the option to add products.",
-    "license": "GPL-2.0-or-later",
-    "keywords": [
-        "orbis",
-        "products",
-        "wordpress",
-        "plugin",
-        "bootstrap"
-    ],
-    "type": "wordpress-plugin",
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^2.7",
-        "wp-coding-standards/wpcs": "0.9.0"
-    },
-    "scripts": {}
+	"name": "pronamic/wp-orbis-products",
+	"description": "The Orbis Products plugin extends your Orbis environment with the option to add products.",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"orbis",
+		"products",
+		"wordpress",
+		"plugin",
+		"bootstrap"
+	],
+	"type": "wordpress-plugin",
+	"autoload": {
+		"psr-4": {
+			"Pronamic\\Orbis\\Products\\": "classes/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"automattic/jetpack-autoloader": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"wp-slug": "orbis-products"
+	},
+	"require": {
+		"automattic/jetpack-autoloader": "^3.0",
+		"pronamic/wp-money": "^2.4"
+	},
+	"require-dev": {
+		"pronamic/wp-coding-standards": "^2.1",
+		"pronamic/pronamic-cli": "^1.1"
+	},
+	"scripts": {}
 }

@@ -1,31 +1,44 @@
 <?php
-/*
-Plugin Name: Orbis Products
-Plugin URI: http://www.pronamic.eu/plugins/orbis-products/
-Description: The Orbis Products plugin extends your Orbis environment with the option to add products.
+/**
+ * Orbis Products
+ *
+ * @package   Pronamic\Orbis\Products
+ * @author    Pronamic
+ * @copyright 2024 Pronamic
+ * @license   GPL-2.0-or-later
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Orbis Products
+ * Plugin URI:        https://wp.pronamic.directory/plugins/orbis-subscriptions/
+ * Description:       The Orbis Products plugin extends your Orbis environment with the option to add products.
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Pronamic
+ * Author URI:        https://www.pronamic.eu/
+ * Text Domain:       orbis-products
+ * Domain Path:       /languages/
+ * License:           GPL v2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Update URI:        https://wp.pronamic.directory/plugins/orbis-products/
+ * GitHub URI:        https://github.com/pronamic/wp-orbis-products
+ */
 
-Version: 1.0.0
-Requires at least: 3.5
+namespace Pronamic\Orbis\Products;
 
-Author: Pronamic
-Author URI: http://www.pronamic.eu/
+/**
+ * Autoload.
+ */
+require_once __DIR__ . '/vendor/autoload_packages.php';
 
-Text Domain: orbis_products
-Domain Path: /languages/
+/**
+ * Bootstrap.
+ */
+add_action(
+	'plugins_loaded',
+	function () {
+		\load_plugin_textdomain( 'orbis-products', false, \dirname( \plugin_basename( __FILE__ ) ) . '/languages' );
 
-License: Copyright (c) Pronamic
-
-GitHub URI: https://github.com/wp-orbis/wp-orbis-products
-*/
-
-function orbis_products_bootstrap() {
-	// Classes
-	require_once 'classes/orbis-products-plugin.php';
-
-	// Initialize
-	global $orbis_products_plugin;
-
-	$orbis_products_plugin = new Orbis_Products_Plugin( __FILE__ );
-}
-
-add_action( 'orbis_bootstrap', 'orbis_products_bootstrap' );
+		Plugin::instance()->setup();
+	}
+);
