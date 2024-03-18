@@ -10,6 +10,8 @@
 
 namespace Pronamic\Orbis\Products;
 
+use Pronamic\WordPress\Money\Money;
+
 /**
  * Admin controller class
  */
@@ -23,6 +25,10 @@ class AdminController {
 		\add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
 
 		\add_action( 'save_post', [ $this, 'save_post' ], 10, 2 );
+
+		\add_filter( 'manage_edit-orbis_product_columns', [ $this, 'manage_edit_columns' ] );
+
+		\add_action( 'manage_posts_custom_column', [ $this, 'manage_posts_custom_column' ], 10, 2 );
 	}
 
 	/**
@@ -65,17 +71,182 @@ class AdminController {
 		}
 
 		$definition = [
-			'_orbis_product_price' => [
+			'_orbis_product_price'       => [
 				'filter'  => FILTER_VALIDATE_FLOAT,
 				'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
-				'options' => [ 'decimal' => ',' ],
+				'options' => [ 'decimal' => $wp_locale->number_format['decimal_point'] ],
 			],
+			'_orbis_product_cost_price'  => [
+				'filter'  => FILTER_VALIDATE_FLOAT,
+				'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
+				'options' => [ 'decimal' => $wp_locale->number_format['decimal_point'] ],
+			],
+			'_orbis_product_auto_renew'  => FILTER_VALIDATE_BOOLEAN,
+			'_orbis_product_deprecated'  => FILTER_VALIDATE_BOOLEAN,
+			'_orbis_product_interval'    => FILTER_SANITIZE_STRING,
+			'_orbis_product_description' => FILTER_SANITIZE_STRING,
+			'_orbis_product_link'        => FILTER_SANITIZE_STRING,
+			'_orbis_product_cancel_note' => FILTER_SANITIZE_STRING,
 		];
 
 		$data = filter_input_array( INPUT_POST, $definition );
 
 		foreach ( $data as $key => $value ) {
-			update_post_meta( $post_id, $key, $value );
+			if ( '' === $value || null === $value ) {
+				\delete_post_meta( $post_id, $key );
+			} else {
+				\update_post_meta( $post_id, $key, $value );
+			}
+		}
+
+		$this->sync_to_custom_table( $post_id );
+	}
+
+	/**
+	 * Sync to custom table.
+	 * 
+	 * @return void
+	 */
+	public function sync_to_custom_table( $post_id ) {
+		global $wpdb;
+
+		$orbis_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->orbis_products WHERE post_id = %d;", $post_id ) );
+
+		$price      = get_post_meta( $post_id, '_orbis_product_price', true );
+		$cost_price = get_post_meta( $post_id, '_orbis_product_cost_price', true );
+		$auto_renew = get_post_meta( $post_id, '_orbis_product_auto_renew', true );
+		$deprecated = get_post_meta( $post_id, '_orbis_product_deprecated', true );
+		$interval   = get_post_meta( $post_id, '_orbis_product_interval', true );
+
+		$data = [];
+		$form = [];
+
+		$data['name'] = get_the_title( $post_id );
+		$form['name'] = '%s';
+
+		if ( ! empty( $price ) ) {
+			$data['price'] = $price;
+			$form['price'] = '%s';
+		}
+
+		if ( ! empty( $cost_price ) ) {
+			$data['cost_price'] = $cost_price;
+			$form['cost_price'] = '%s';
+		}
+
+		$data['auto_renew'] = $auto_renew;
+		$form['auto_renew'] = '%d';
+
+		$data['deprecated'] = $deprecated;
+		$form['deprecated'] = '%d';
+
+		$data['interval'] = $interval;
+		$form['interval'] = '%s';
+
+		if ( empty( $orbis_id ) ) {
+			$data['post_id'] = $post_id;
+			$form['post_id'] = '%d';
+
+			$result = $wpdb->insert( $wpdb->orbis_products, $data, $form );
+
+			if ( false !== $result ) {
+				$orbis_id = $wpdb->insert_id;
+			}
+		} else {
+			$result = $wpdb->update(
+				$wpdb->orbis_products,
+				$data,
+				[ 'id' => $orbis_id ],
+				$form,
+				[ '%d' ]
+			);
+		}
+
+		update_post_meta( $post_id, '_orbis_product_id', $orbis_id );
+	}
+
+	/**
+	 * Manage edit columns.
+	 * 
+	 * @param array $columns Columns.
+	 * @return array
+	 */
+	public function manage_edit_columns( $columns ) {
+		$columns['orbis_product_price']      = __( 'Price', 'orbis-products' );
+		$columns['orbis_product_cost_price'] = __( 'Cost Price', 'orbis-products' );
+		$columns['orbis_product_deprecated'] = __( 'Deprecated', 'orbis-products' );
+		$columns['orbis_product_id']         = __( 'Orbis ID', 'orbis-products' );
+
+		$new_columns = [];
+
+		foreach ( $columns as $name => $label ) {
+			if ( 'author' === $name ) {
+				$new_columns['orbis_product_price']      = $columns['orbis_product_price'];
+				$new_columns['orbis_product_cost_price'] = $columns['orbis_product_cost_price'];
+				$new_columns['orbis_product_deprecated'] = $columns['orbis_product_deprecated'];
+				$new_columns['orbis_product_id']         = $columns['orbis_product_id'];
+			}
+
+			$new_columns[ $name ] = $label;
+		}
+
+		$columns = $new_columns;
+
+		return $columns;
+	}
+
+	/**
+	 * Manage posts custom column.
+	 *
+	 * @param string $column  Column.
+	 * @param int    $post_id Post ID.
+	 */
+	public function manage_posts_custom_column( $column, $post_id ) {
+		switch ( $column ) {
+			case 'orbis_product_id':
+				$id = get_post_meta( $post_id, '_orbis_product_id', true );
+
+				if ( empty( $id ) ) {
+					echo '—';
+				} else {
+					$url = sprintf( 'http://orbis.pronamic.nl/projecten/details/%s/', $id );
+
+					printf( '<a href="%s" target="_blank">%s</a>', esc_attr( $url ), esc_html( $id ) );
+				}
+
+				break;
+			case 'orbis_product_price':
+				$price = get_post_meta( $post_id, '_orbis_product_price', true );
+
+				if ( empty( $price ) ) {
+					echo '—';
+				} else {
+					$price = new Money( $price, 'EUR' );
+					echo esc_html( $price->format_i18n() );
+				}
+
+				break;
+			case 'orbis_product_cost_price':
+				$price = get_post_meta( $post_id, '_orbis_product_cost_price', true );
+
+				if ( empty( $price ) ) {
+					echo '—';
+				} else {
+					$price = new Money( $price, 'EUR' );
+					echo esc_html( $price->format_i18n() );
+				}
+
+				break;
+			case 'orbis_product_deprecated':
+				$deprecated = get_post_meta( $post_id, '_orbis_product_deprecated', true );
+
+				if ( '' === $deprecated ) {
+					echo '—';
+				} else {
+					echo esc_html( $deprecated ? __( 'Yes', 'orbis-products' ) : __( 'No', 'orbis-products' ) );
+				}
+
+				break;
 		}
 	}
 }
