@@ -71,16 +71,8 @@ class AdminController {
 		}
 
 		$definition = [
-			'_orbis_product_price'       => [
-				'filter'  => FILTER_VALIDATE_FLOAT,
-				'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
-				'options' => [ 'decimal' => $wp_locale->number_format['decimal_point'] ],
-			],
-			'_orbis_product_cost_price'  => [
-				'filter'  => FILTER_VALIDATE_FLOAT,
-				'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
-				'options' => [ 'decimal' => $wp_locale->number_format['decimal_point'] ],
-			],
+			'_orbis_product_price'       => FILTER_SANITIZE_STRING,
+			'_orbis_product_cost_price'  => FILTER_SANITIZE_STRING,
 			'_orbis_product_auto_renew'  => FILTER_VALIDATE_BOOLEAN,
 			'_orbis_product_deprecated'  => FILTER_VALIDATE_BOOLEAN,
 			'_orbis_product_interval'    => FILTER_SANITIZE_STRING,

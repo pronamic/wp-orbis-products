@@ -42,7 +42,7 @@ $cancel_note = get_post_meta( $post->ID, '_orbis_product_cancel_note', true );
 				<label for="orbis_subscription_product_price"><?php esc_html_e( 'Price', 'orbis-products' ); ?></label>
 			</th>
 			<td>
-				<input type="text" id="orbis_subscription_product_price" name="_orbis_product_price" value="<?php echo esc_attr( empty( $price ) ? '' : number_format_i18n( $price, 2 ) ); ?>" class="regular-text" />
+				<input type="number" step="0.01" id="orbis_subscription_product_price" name="_orbis_product_price" value="<?php echo esc_attr( empty( $price ) ? '' : number_format( $price, 2, '.', '' ) ); ?>" class="regular-text" />
 			</td>
 		</tr>
 		<tr valign="top">
@@ -50,7 +50,7 @@ $cancel_note = get_post_meta( $post->ID, '_orbis_product_cancel_note', true );
 				<label for="orbis_subscription_product_cost_price"><?php esc_html_e( 'Cost Price', 'orbis-products' ); ?></label>
 			</th>
 			<td>
-				<input type="text" id="orbis_subscription_product_cost_price" name="_orbis_product_cost_price" value="<?php echo esc_attr( empty( $cost_price ) ? '' : number_format_i18n( $cost_price, 2 ) ); ?>" class="regular-text" />
+				<input type="number" step="0.01" id="orbis_subscription_product_cost_price" name="_orbis_product_cost_price" value="<?php echo esc_attr( empty( $cost_price ) ? '' : number_format( $cost_price, 2, '.', '' ) ); ?>" class="regular-text" />
 			</td>
 		</tr>
 		<tr valign="top">
