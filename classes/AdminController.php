@@ -113,7 +113,7 @@ class AdminController {
 		$data = [];
 		$form = [];
 
-		$data['name'] = get_the_title( $post_id );
+		$data['name'] = \get_post_field( 'post_title', $post_id, 'db' );
 		$form['name'] = '%s';
 
 		if ( ! empty( $price ) ) {
