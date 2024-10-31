@@ -41,6 +41,33 @@ $price_string = \get_post_meta( get_the_ID(), '_orbis_product_price', true );
 
 					?>
 				</dd>
+
+				<dt><?php esc_html_e( 'Cost Price', 'orbis-products' ); ?></dt>
+				<dd>
+					<?php
+
+					$price = get_post_meta( get_the_ID(), '_orbis_product_cost_price', true );
+
+					if ( empty( $price ) ) {
+						echo '—';
+					} else {
+						$price = new Money( $price, 'EUR' );
+						echo esc_html( $price->format_i18n() );
+					}
+
+					?>
+				</dd>
+
+				<dt><?php esc_html_e( 'Auto Renew', 'orbis-products' ); ?></dt>
+				<dd>
+					<?php
+
+					$auto_renew = get_post_meta( get_the_ID(), '_orbis_product_auto_renew', true );
+
+					echo esc_html( $auto_renew ? __( 'Yes', 'orbis-products' ) : __( 'No', 'orbis-products' ) );
+
+					?>
+				</dd>
 			</dl>
 		</div>
 	</div>
