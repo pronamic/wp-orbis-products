@@ -3,7 +3,7 @@
  * Admin controller
  *
  * @author    Pronamic <info@pronamic.eu>
- * @copyright 2005-2024 Pronamic
+ * @copyright 2005-2026 Pronamic
  * @license   GPL-2.0-or-later
  * @package   Pronamic\Orbis\Products
  */
@@ -18,7 +18,7 @@ use Pronamic\WordPress\Money\Money;
 class AdminController {
 	/**
 	 * Setup.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function setup() {
@@ -33,7 +33,7 @@ class AdminController {
 
 	/**
 	 * Add meta boxes.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function add_meta_boxes() {
@@ -96,7 +96,7 @@ class AdminController {
 
 	/**
 	 * Sync to custom table.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function sync_to_custom_table( $post_id ) {
@@ -159,7 +159,7 @@ class AdminController {
 
 	/**
 	 * Manage edit columns.
-	 * 
+	 *
 	 * @param array $columns Columns.
 	 * @return array
 	 */

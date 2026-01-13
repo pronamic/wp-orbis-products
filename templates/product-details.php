@@ -3,7 +3,7 @@
  * Product details
  *
  * @author    Pronamic <info@pronamic.eu>
- * @copyright 2005-2024 Pronamic
+ * @copyright 2005-2026 Pronamic
  * @license   GPL-2.0-or-later
  * @package   Pronamic\Orbis\Products
  */
@@ -71,5 +71,5 @@ $price_string = \get_post_meta( get_the_ID(), '_orbis_product_price', true );
 			</dl>
 		</div>
 	</div>
-	
+
 </div>

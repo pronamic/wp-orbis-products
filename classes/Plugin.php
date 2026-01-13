@@ -3,7 +3,7 @@
  * Plugin
  *
  * @author    Pronamic <info@pronamic.eu>
- * @copyright 2005-2024 Pronamic
+ * @copyright 2005-2026 Pronamic
  * @license   GPL-2.0-or-later
  * @package   Pronamic\Orbis\Products
  */
@@ -16,28 +16,28 @@ namespace Pronamic\Orbis\Products;
 class Plugin {
 	/**
 	 * Controllers.
-	 * 
+	 *
 	 * @var array
 	 */
 	private $controllers;
 
 	/**
 	 * Instance.
-	 * 
+	 *
 	 * @var null|self
 	 */
 	private static $instance = null;
 
 	/**
 	 * Instance.
-	 * 
+	 *
 	 * @return self
 	 */
 	public static function instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
- 
+
 		return self::$instance;
 	}
 
@@ -53,7 +53,7 @@ class Plugin {
 
 	/**
 	 * Setup.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function setup() {
@@ -66,7 +66,7 @@ class Plugin {
 
 	/**
 	 * Initialize.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function init() {
@@ -114,7 +114,7 @@ class Plugin {
 
 	/**
 	 * Install.
-	 * 
+	 *
 	 * @link https://codex.wordpress.org/Creating_Tables_with_Plugins
 	 * @return void
 	 */

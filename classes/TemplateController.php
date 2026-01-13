@@ -3,7 +3,7 @@
  * Template controller
  *
  * @author    Pronamic <info@pronamic.eu>
- * @copyright 2005-2024 Pronamic
+ * @copyright 2005-2026 Pronamic
  * @license   GPL-2.0-or-later
  * @package   Pronamic\Orbis\Products
  */
@@ -16,7 +16,7 @@ namespace Pronamic\Orbis\Products;
 class TemplateController {
 	/**
 	 * Setup.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function setup() {
@@ -25,7 +25,7 @@ class TemplateController {
 
 	/**
 	 * Maybe include product details.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function maybe_include_product_details() {
