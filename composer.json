@@ -12,7 +12,7 @@
 	"type": "wordpress-plugin",
 	"autoload": {
 		"psr-4": {
-			"Pronamic\\Orbis\\Products\\": "classes/"
+			"Pronamic\\Orbis\\Products\\": "psr-4/"
 		}
 	},
 	"config": {
