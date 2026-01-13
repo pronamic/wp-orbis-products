@@ -1,4 +1,4 @@
-# Copyright (C) 2024 Pronamic
+# Copyright (C) 2026 Pronamic
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-18T13:39:00+00:00\n"
+"POT-Creation-Date: 2026-01-13T13:10:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: orbis-products\n"
 
 #. Plugin Name of the plugin
@@ -40,22 +40,24 @@ msgid "https://www.pronamic.eu/"
 msgstr ""
 
 #: admin/meta-box-product-details.php:34
-#: classes/AdminController.php:178
+#: psr-4/AdminController.php:170
 msgid "Orbis ID"
 msgstr ""
 
 #: admin/meta-box-product-details.php:42
-#: classes/AdminController.php:175
+#: psr-4/AdminController.php:167
 #: templates/product-details.php:28
 msgid "Price"
 msgstr ""
 
 #: admin/meta-box-product-details.php:50
-#: classes/AdminController.php:176
+#: psr-4/AdminController.php:168
+#: templates/product-details.php:45
 msgid "Cost Price"
 msgstr ""
 
 #: admin/meta-box-product-details.php:59
+#: templates/product-details.php:61
 msgid "Auto Renew"
 msgstr ""
 
@@ -64,7 +66,7 @@ msgid "Auto renew subscription product"
 msgstr ""
 
 #: admin/meta-box-product-details.php:72
-#: classes/AdminController.php:177
+#: psr-4/AdminController.php:169
 msgid "Deprecated"
 msgstr ""
 
@@ -108,72 +110,127 @@ msgstr ""
 msgid "Cancel Note"
 msgstr ""
 
-#: classes/AdminController.php:42
+#: psr-4/AdminController.php:42
 msgid "Product Details"
 msgstr ""
 
-#: classes/AdminController.php:246
+#: psr-4/AdminController.php:238
+#: templates/product-details.php:67
 msgid "Yes"
 msgstr ""
 
-#: classes/AdminController.php:246
+#: psr-4/AdminController.php:238
+#: templates/product-details.php:67
 msgid "No"
 msgstr ""
 
-#: classes/Plugin.php:88
-#: classes/Plugin.php:101
+#: psr-4/Plugin.php:88
+#: psr-4/Plugin.php:101
 msgid "Products"
 msgstr ""
 
-#: classes/Plugin.php:90
+#: psr-4/Plugin.php:90
 msgctxt "post type general name"
 msgid "Products"
 msgstr ""
 
-#: classes/Plugin.php:91
+#: psr-4/Plugin.php:91
 msgctxt "post type singular name"
 msgid "Product"
 msgstr ""
 
-#: classes/Plugin.php:92
+#: psr-4/Plugin.php:92
+#: psr-4/Plugin.php:121
 msgid "Add New"
 msgstr ""
 
-#: classes/Plugin.php:93
+#: psr-4/Plugin.php:93
 msgid "Add New Product"
 msgstr ""
 
-#: classes/Plugin.php:94
+#: psr-4/Plugin.php:94
 msgid "Edit Product"
 msgstr ""
 
-#: classes/Plugin.php:95
+#: psr-4/Plugin.php:95
 msgid "New Product"
 msgstr ""
 
-#: classes/Plugin.php:96
+#: psr-4/Plugin.php:96
 msgid "View Product"
 msgstr ""
 
-#: classes/Plugin.php:97
+#: psr-4/Plugin.php:97
 msgid "Search Products"
 msgstr ""
 
-#: classes/Plugin.php:98
+#: psr-4/Plugin.php:98
 msgid "No products found"
 msgstr ""
 
-#: classes/Plugin.php:99
+#: psr-4/Plugin.php:99
 msgid "No products found in Trash"
 msgstr ""
 
-#: classes/Plugin.php:100
+#: psr-4/Plugin.php:100
 msgid "Parent Products:"
 msgstr ""
 
-#: classes/Plugin.php:109
+#: psr-4/Plugin.php:109
 msgctxt "slug"
 msgid "products"
+msgstr ""
+
+#: psr-4/Plugin.php:117
+#: psr-4/Plugin.php:130
+msgid "Product Changes"
+msgstr ""
+
+#: psr-4/Plugin.php:119
+msgctxt "post type general name"
+msgid "Product Changes"
+msgstr ""
+
+#: psr-4/Plugin.php:120
+msgctxt "post type singular name"
+msgid "Product Change"
+msgstr ""
+
+#: psr-4/Plugin.php:122
+msgid "Add New Product Change"
+msgstr ""
+
+#: psr-4/Plugin.php:123
+msgid "Edit Product Change"
+msgstr ""
+
+#: psr-4/Plugin.php:124
+msgid "New Product Change"
+msgstr ""
+
+#: psr-4/Plugin.php:125
+msgid "View Product Change"
+msgstr ""
+
+#: psr-4/Plugin.php:126
+msgid "Search Product Changes"
+msgstr ""
+
+#: psr-4/Plugin.php:127
+msgid "No product changes found"
+msgstr ""
+
+#: psr-4/Plugin.php:128
+msgid "No product changes found in Trash"
+msgstr ""
+
+#: psr-4/Plugin.php:129
+msgid "Parent Product Changes:"
+msgstr ""
+
+#: psr-4/Plugin.php:138
+msgctxt "slug"
+msgid "product-changes"
 msgstr ""
 
 #: templates/product-details.php:23

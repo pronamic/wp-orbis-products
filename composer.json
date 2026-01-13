@@ -28,14 +28,30 @@
 	},
 	"require-dev": {
 		"pronamic/wp-coding-standards": "^2.1",
-		"pronamic/pronamic-cli": "^1.1"
+		"pronamic/pronamic-cli": "^1.1",
+		"wp-cli/dist-archive-command": "*",
+		"wp-cli/wp-cli-bundle": "*"
 	},
 	"scripts": {
-		"build": "vendor/bin/pronamic wp-build",
+		"build": [
+			"rm -rf ./build",
+			"mkdir ./build",
+			"mkdir ./build/stage-1",
+			"mkdir ./build/stage-2",
+			"rsync --recursive --verbose --exclude-from=.distignore --exclude=/vendor/ ./ ./build/stage-1/",
+			"composer install --no-dev --prefer-dist --optimize-autoloader --working-dir=./build/stage-1/",
+			"rsync --recursive --verbose --exclude-from=.distignore ./build/stage-1/ ./build/stage-2/",
+			"vendor/bin/wp i18n make-pot ./build/stage-2/ --slug=orbis-products",
+			"vendor/bin/wp i18n make-json ./build/stage-2/languages/*.po --no-purge",
+			"vendor/bin/wp i18n make-mo ./build/stage-2/languages/",
+			"vendor/bin/wp dist-archive ./build/stage-2/ --plugin-dirname=orbis-products"
+		],
+		"dist-archive": "wp dist-archive . --plugin-dirname=orbis-products",
 		"phpcs": "vendor/bin/phpcs",
 		"translate": [
 			"@build",
-			"rsync --recursive --delete --verbose ./build/project/languages/ ./languages/"
+			"rsync --recursive --delete --verbose ./build/stage-2/languages/ ./languages/",
+			"vendor/bin/wp i18n update-po ./languages/orbis-products.pot"
 		],
 		"qa": [
 			"@phpcs"

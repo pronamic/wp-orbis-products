@@ -110,6 +110,35 @@ class Plugin {
 				],
 			]
 		);
+
+		\register_post_type(
+			'orbis_product_change',
+			[
+				'label'         => __( 'Product Changes', 'orbis-products' ),
+				'labels'        => [
+					'name'               => _x( 'Product Changes', 'post type general name', 'orbis-products' ),
+					'singular_name'      => _x( 'Product Change', 'post type singular name', 'orbis-products' ),
+					'add_new'            => __( 'Add New', 'orbis-products' ),
+					'add_new_item'       => __( 'Add New Product Change', 'orbis-products' ),
+					'edit_item'          => __( 'Edit Product Change', 'orbis-products' ),
+					'new_item'           => __( 'New Product Change', 'orbis-products' ),
+					'view_item'          => __( 'View Product Change', 'orbis-products' ),
+					'search_items'       => __( 'Search Product Changes', 'orbis-products' ),
+					'not_found'          => __( 'No product changes found', 'orbis-products' ),
+					'not_found_in_trash' => __( 'No product changes found in Trash', 'orbis-products' ),
+					'parent_item_colon'  => __( 'Parent Product Changes:', 'orbis-products' ),
+					'menu_name'          => __( 'Product Changes', 'orbis-products' ),
+				],
+				'public'        => true,
+				'menu_position' => 30,
+				'menu_icon'     => 'dashicons-admin-settings',
+				'supports'      => [ 'title', 'editor', 'author', 'comments' ],
+				'has_archive'   => true,
+				'rewrite'       => [
+					'slug' => _x( 'product-changes', 'slug', 'orbis-products' ),
+				],
+			]
+		);
 	}
 
 	/**
@@ -144,7 +173,7 @@ class Plugin {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		dbDelta( $sql );
+		\dbDelta( $sql );
 
 		\maybe_convert_table_to_utf8mb4( $wpdb->orbis_products );
 	}
