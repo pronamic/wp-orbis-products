@@ -1,60 +1,114 @@
 {
 	"name": "pronamic/wp-orbis-products",
 	"description": "The Orbis Products plugin extends your Orbis environment with the option to add products.",
+	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"orbis",
 		"products",
 		"wordpress",
-		"plugin",
-		"bootstrap"
+		"plugin"
 	],
-	"type": "wordpress-plugin",
+	"homepage": "https://www.pronamic.eu/orbis/",
 	"autoload": {
 		"psr-4": {
 			"Pronamic\\Orbis\\Products\\": "psr-4/"
 		}
 	},
+	"authors": [
+		{
+			"name": "Pronamic",
+			"email": "info@pronamic.eu",
+			"homepage": "https://www.pronamic.eu/",
+			"role": "Developer"
+		},
+		{
+			"name": "Remco Tolsma",
+			"email": "info@remcotolsma.nl",
+			"homepage": "https://www.remcotolsma.nl/",
+			"role": "Developer"
+		},
+		{
+			"name": "Karel-Jan Tolsma",
+			"email": "info@kareljantolsma.nl",
+			"homepage": "https://www.kareljantolsma.nl/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "support@pronamic.eu",
+		"issues": "https://github.com/pronamic/wp-orbis-products/issues",
+		"source": "https://github.com/pronamic/wp-orbis-products"
+	},
 	"config": {
 		"allow-plugins": {
 			"automattic/jetpack-autoloader": true,
-			"dealerdirect/phpcodesniffer-composer-installer": true
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
 		},
-		"wp-slug": "orbis-products"
+		"platform": {
+			"php": "8.3"
+		},
+		"platform-check": false,
+		"sort-packages": true
 	},
 	"require": {
-		"automattic/jetpack-autoloader": "^3.0",
+		"php": "^8.3",
+		"automattic/jetpack-autoloader": "^6.0",
+		"composer/installers": "^2.3",
 		"pronamic/wp-money": "^2.4"
 	},
 	"require-dev": {
-		"pronamic/wp-coding-standards": "^2.1",
-		"pronamic/pronamic-cli": "^1.1",
+		"deployer/deployer": "^7.5",
+		"phpstan/extension-installer": "^1.4",
+		"phpstan/phpstan": "^2.3",
+		"pronamic/wp-coding-standards": "^2.5",
+		"rector/rector": "^2.8",
+		"roots/wordpress-no-content": "^7.1",
+		"szepeviktor/phpstan-wordpress": "^2.0",
 		"wp-cli/dist-archive-command": "*",
 		"wp-cli/wp-cli-bundle": "*"
 	},
+	"extra": {
+		"installer-paths": {
+			"packages/{$vendor}/{$name}": [
+				"vendor:pronamic",
+				"vendor:solvebeam",
+				"vendor:wp-pay",
+				"woocommerce/action-scheduler"
+			]
+		},
+		"wp-slug": "orbis-products"
+	},
 	"scripts": {
 		"build": [
-			"rm -rf ./build",
-			"mkdir ./build",
-			"mkdir ./build/stage-1",
-			"mkdir ./build/stage-2",
+			"rm -rf ./build/stage-1",
 			"rsync --recursive --verbose --exclude-from=.distignore --exclude=/vendor/ ./ ./build/stage-1/",
 			"composer install --no-dev --prefer-dist --optimize-autoloader --working-dir=./build/stage-1/",
-			"rsync --recursive --verbose --exclude-from=.distignore ./build/stage-1/ ./build/stage-2/",
-			"vendor/bin/wp i18n make-pot ./build/stage-2/ --slug=orbis-products",
-			"vendor/bin/wp i18n make-json ./build/stage-2/languages/*.po --no-purge",
-			"vendor/bin/wp i18n make-mo ./build/stage-2/languages/",
-			"vendor/bin/wp dist-archive ./build/stage-2/ --plugin-dirname=orbis-products"
+			"rsync --recursive --delete --delete-excluded --verbose --exclude-from=.distignore ./build/stage-1/ ./build/orbis-products/",
+			"vendor/bin/wp i18n make-pot ./build/orbis-products/ --slug=orbis-products",
+			"vendor/bin/wp i18n make-mo ./build/orbis-products/languages/",
+			"vendor/bin/wp dist-archive ./build/orbis-products/ --plugin-dirname=orbis-products --force"
+		],
+		"deploy": [
+			"Composer\\Config::disableProcessTimeout",
+			"DEPLOYER_IMPORT=${DEPLOYER_IMPORT:-$HOME/deployer.php} vendor/bin/dep deploy"
 		],
 		"dist-archive": "wp dist-archive . --plugin-dirname=orbis-products",
-		"phpcs": "vendor/bin/phpcs",
-		"translate": [
+		"make-pot": [
 			"@build",
-			"rsync --recursive --delete --verbose ./build/stage-2/languages/ ./languages/",
+			"rsync --recursive --delete --verbose ./build/orbis-products/languages/ ./languages/",
 			"vendor/bin/wp i18n update-po ./languages/orbis-products.pot"
 		],
+		"phpcs": "vendor/bin/phpcs",
+		"phpcbf": "vendor/bin/phpcbf",
+		"phpstan": "vendor/bin/phpstan analyse --memory-limit=-1",
+		"rector": "vendor/bin/rector process",
 		"qa": [
-			"@phpcs"
+			"@phpcs",
+			"@phpstan",
+			"vendor/bin/rector process --dry-run"
 		]
 	}
 }

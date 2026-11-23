@@ -1,38 +1,27 @@
 {
-	"name": "orbis-products",
+	"name": "@pronamic/wp-orbis-products",
 	"version": "1.0.0",
 	"description": "The Orbis Products plugin extends your Orbis environment with the option to add products.",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/wp-orbis/wp-orbis-products.git"
-	},
+	"author": "Pronamic",
+	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"orbis",
-		"product",
 		"products"
 	],
-	"author": {
-		"name": "Pronamic",
-		"email": "info@pronamic.nl",
-		"url": "http://www.pronamic.nl/"
+	"homepage": "https://github.com/pronamic/wp-orbis-products#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pronamic/wp-orbis-products.git"
 	},
-	"contributors": [
-		{
-			"name": "Karel-Jan Tolsma",
-			"email": "info@kareljantolsma.nl",
-			"url": "http://kareljantolsma.nl/"
-		}
-	],
-	"license": "GPL",
 	"bugs": {
-		"url": "https://github.com/wp-orbis/wp-orbis-products/issues",
-		"email": "support@pronamic.nl"
+		"url": "https://github.com/pronamic/wp-orbis-products/issues"
 	},
-	"homepage": "https://github.com/wp-orbis/wp-orbis-products",
+	"dependencies": {},
 	"devDependencies": {
-		"@wordpress/env": "^10.37.0",
-		"@wordpress/scripts": "^31.2.0"
+		"@wordpress/env": "^12.1.0",
+		"@wordpress/scripts": "^37.1.0"
 	},
+	"prettier": "@wordpress/prettier-config",
 	"scripts": {
 		"lint:pkg-json": "wp-scripts lint-pkg-json"
 	}

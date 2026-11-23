@@ -1,16 +1,25 @@
+.DS_Store
+
 # Build
 /build/
 
-# Composer
-/vendor/
+# Blocks
+/blocks/
 
 # Deploy
 /deploy/
 
-# Eclipse
-/.buildpath
-/.project
-/.settings/
-
 # Node.js
 /node_modules/
+/package-lock.json
+
+# Composer
+/vendor/
+/packages/
+/composer.lock
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json
+
+# State
+/state/

@@ -2,11 +2,13 @@
 /**
  * Admin controller
  *
- * @author    Pronamic <info@pronamic.eu>
+ * @author    Pronamic
  * @copyright 2005-2026 Pronamic
  * @license   GPL-2.0-or-later
  * @package   Pronamic\Orbis\Products
  */
+
+declare(strict_types=1);
 
 namespace Pronamic\Orbis\Products;
 
@@ -15,20 +17,33 @@ use Pronamic\WordPress\Money\Money;
 /**
  * Admin controller class
  */
-class AdminController {
+final class AdminController {
 	/**
-	 * Setup.
-	 *
-	 * @return void
+	 * Construct.
 	 */
-	public function setup() {
-		\add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
+	public function __construct() {
+		\add_action( 'add_meta_boxes', $this->add_meta_boxes( ... ) );
 
-		\add_action( 'save_post', [ $this, 'save_post' ], 10, 2 );
+		\add_action( 'save_post_orbis_product', $this->save_product( ... ) );
 
-		\add_filter( 'manage_edit-orbis_product_columns', [ $this, 'manage_edit_columns' ] );
+		\add_filter( 'manage_edit-orbis_product_columns', $this->edit_columns( ... ) );
 
-		\add_action( 'manage_posts_custom_column', [ $this, 'manage_posts_custom_column' ], 10, 2 );
+		\add_action( 'manage_orbis_product_posts_custom_column', $this->custom_columns( ... ), 10, 2 );
+	}
+
+	/**
+	 * Intervals.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function get_intervals(): array {
+		return [
+			'Y'  => \__( 'Yearly', 'orbis-products' ),
+			'2Y' => \__( 'Two Yearly', 'orbis-products' ),
+			'3Y' => \__( 'Three Yearly', 'orbis-products' ),
+			'M'  => \__( 'Monthly', 'orbis-products' ),
+			'Q'  => \__( 'Quarterly', 'orbis-products' ),
+		];
 	}
 
 	/**
@@ -36,13 +51,11 @@ class AdminController {
 	 *
 	 * @return void
 	 */
-	public function add_meta_boxes() {
+	private function add_meta_boxes(): void {
 		\add_meta_box(
 			'orbis_product_details',
 			\__( 'Product Details', 'orbis-products' ),
-			function () {
-				include __DIR__ . '/../admin/meta-box-product-details.php';
-			},
+			$this->meta_box_product_details( ... ),
 			'orbis_product',
 			'normal',
 			'high'
@@ -50,41 +63,53 @@ class AdminController {
 	}
 
 	/**
-	 * Save product details.
+	 * Meta box product details.
 	 *
-	 * @param int     $post_id
-	 * @param WP_Post $post
+	 * @param \WP_Post $post Post.
+	 * @return void
 	 */
-	public function save_post( $post_id, $post ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+	private function meta_box_product_details( \WP_Post $post ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- The post is used in the meta box template.
+		include __DIR__ . '/../admin/meta-box-product-details.php';
+	}
+
+	/**
+	 * Save product.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return void
+	 */
+	private function save_product( int $post_id ): void {
+		if ( \defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
 
-		$nonce = filter_input( INPUT_POST, 'orbis_product_details_meta_box_nonce', FILTER_SANITIZE_STRING );
+		$nonce = \sanitize_text_field( $this->get_input( 'orbis_product_details_meta_box_nonce' ) );
 
-		if ( ! wp_verify_nonce( $nonce, 'orbis_save_product_details' ) ) {
+		if ( false === \wp_verify_nonce( $nonce, 'orbis_save_product_details' ) ) {
 			return;
 		}
 
-		if ( ! ( 'orbis_product' === $post->post_type && current_user_can( 'edit_post', $post_id ) ) ) {
+		if ( ! \current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
 
-		$definition = [
-			'_orbis_product_price'       => FILTER_SANITIZE_STRING,
-			'_orbis_product_cost_price'  => FILTER_SANITIZE_STRING,
-			'_orbis_product_auto_renew'  => FILTER_VALIDATE_BOOLEAN,
-			'_orbis_product_deprecated'  => FILTER_VALIDATE_BOOLEAN,
-			'_orbis_product_interval'    => FILTER_SANITIZE_STRING,
-			'_orbis_product_description' => FILTER_SANITIZE_STRING,
-			'_orbis_product_link'        => FILTER_SANITIZE_STRING,
-			'_orbis_product_cancel_note' => FILTER_SANITIZE_STRING,
+		$price      = \sanitize_text_field( $this->get_input( '_orbis_product_price' ) );
+		$cost_price = \sanitize_text_field( $this->get_input( '_orbis_product_cost_price' ) );
+		$interval   = \sanitize_text_field( $this->get_input( '_orbis_product_interval' ) );
+
+		$data = [
+			'_orbis_product_price'       => \is_numeric( $price ) ? $price : '',
+			'_orbis_product_cost_price'  => \is_numeric( $cost_price ) ? $cost_price : '',
+			'_orbis_product_auto_renew'  => '' === $this->get_input( '_orbis_product_auto_renew' ) ? '' : '1',
+			'_orbis_product_deprecated'  => '' === $this->get_input( '_orbis_product_deprecated' ) ? '' : '1',
+			'_orbis_product_interval'    => \array_key_exists( $interval, self::get_intervals() ) ? $interval : '',
+			'_orbis_product_description' => \sanitize_textarea_field( $this->get_input( '_orbis_product_description' ) ),
+			'_orbis_product_link'        => \sanitize_url( $this->get_input( '_orbis_product_link' ) ),
+			'_orbis_product_cancel_note' => \sanitize_textarea_field( $this->get_input( '_orbis_product_cancel_note' ) ),
 		];
 
-		$data = filter_input_array( INPUT_POST, $definition );
-
 		foreach ( $data as $key => $value ) {
-			if ( '' === $value || null === $value ) {
+			if ( '' === $value ) {
 				\delete_post_meta( $post_id, $key );
 			} else {
 				\update_post_meta( $post_id, $key, $value );
@@ -95,150 +120,171 @@ class AdminController {
 	}
 
 	/**
+	 * Get input.
+	 *
+	 * Returns the unslashed `$_POST` value, the caller sanitizes it.
+	 *
+	 * @param string $key Key.
+	 * @return string
+	 */
+	private function get_input( string $key ): string {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The nonce is verified and the value is sanitized by the caller.
+		$value = $_POST[ $key ] ?? '';
+
+		return \is_string( $value ) ? \wp_unslash( $value ) : '';
+	}
+
+	/**
+	 * Get meta.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $key     Meta key.
+	 * @return string
+	 */
+	private function get_meta( int $post_id, string $key ): string {
+		$value = \get_post_meta( $post_id, $key, true );
+
+		return \is_string( $value ) ? $value : '';
+	}
+
+	/**
 	 * Sync to custom table.
 	 *
+	 * @param int $post_id Post ID.
 	 * @return void
 	 */
-	public function sync_to_custom_table( $post_id ) {
+	private function sync_to_custom_table( int $post_id ): void {
 		global $wpdb;
 
-		$orbis_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->orbis_products WHERE post_id = %d;", $post_id ) );
+		/**
+		 * WordPress database abstraction object.
+		 *
+		 * @var \wpdb $wpdb
+		 */
 
-		$price      = get_post_meta( $post_id, '_orbis_product_price', true );
-		$cost_price = get_post_meta( $post_id, '_orbis_product_cost_price', true );
-		$auto_renew = get_post_meta( $post_id, '_orbis_product_auto_renew', true );
-		$deprecated = get_post_meta( $post_id, '_orbis_product_deprecated', true );
-		$interval   = get_post_meta( $post_id, '_orbis_product_interval', true );
+		$table = $wpdb->prefix . 'orbis_products';
 
-		$data = [];
-		$form = [];
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table.
+		$orbis_id = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM %i WHERE post_id = %d;', $table, $post_id ) );
 
-		$data['name'] = \get_post_field( 'post_title', $post_id, 'db' );
-		$form['name'] = '%s';
+		$price      = $this->get_meta( $post_id, '_orbis_product_price' );
+		$cost_price = $this->get_meta( $post_id, '_orbis_product_cost_price' );
 
-		if ( ! empty( $price ) ) {
-			$data['price'] = $price;
-			$form['price'] = '%s';
+		$data = [
+			'name'       => \get_post_field( 'post_title', $post_id, 'db' ),
+			'auto_renew' => '' === $this->get_meta( $post_id, '_orbis_product_auto_renew' ) ? 0 : 1,
+			'deprecated' => '' === $this->get_meta( $post_id, '_orbis_product_deprecated' ) ? 0 : 1,
+			'interval'   => $this->get_meta( $post_id, '_orbis_product_interval' ),
+		];
+
+		$format = [
+			'name'       => '%s',
+			'auto_renew' => '%d',
+			'deprecated' => '%d',
+			'interval'   => '%s',
+		];
+
+		if ( '' !== $price ) {
+			$data['price']   = $price;
+			$format['price'] = '%s';
 		}
 
-		if ( ! empty( $cost_price ) ) {
-			$data['cost_price'] = $cost_price;
-			$form['cost_price'] = '%s';
+		if ( '' !== $cost_price ) {
+			$data['cost_price']   = $cost_price;
+			$format['cost_price'] = '%s';
 		}
 
-		$data['auto_renew'] = $auto_renew;
-		$form['auto_renew'] = '%d';
+		if ( null === $orbis_id ) {
+			$data['post_id']   = $post_id;
+			$format['post_id'] = '%d';
 
-		$data['deprecated'] = $deprecated;
-		$form['deprecated'] = '%d';
-
-		$data['interval'] = $interval;
-		$form['interval'] = '%s';
-
-		if ( empty( $orbis_id ) ) {
-			$data['post_id'] = $post_id;
-			$form['post_id'] = '%d';
-
-			$result = $wpdb->insert( $wpdb->orbis_products, $data, $form );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table.
+			$result = $wpdb->insert( $table, $data, $format );
 
 			if ( false !== $result ) {
-				$orbis_id = $wpdb->insert_id;
+				$orbis_id = (string) $wpdb->insert_id;
 			}
 		} else {
-			$result = $wpdb->update(
-				$wpdb->orbis_products,
-				$data,
-				[ 'id' => $orbis_id ],
-				$form,
-				[ '%d' ]
-			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table.
+			$wpdb->update( $table, $data, [ 'id' => $orbis_id ], $format, [ '%d' ] );
 		}
 
-		update_post_meta( $post_id, '_orbis_product_id', $orbis_id );
+		if ( null !== $orbis_id ) {
+			\update_post_meta( $post_id, '_orbis_product_id', $orbis_id );
+		}
 	}
 
 	/**
-	 * Manage edit columns.
+	 * Edit columns.
 	 *
-	 * @param array $columns Columns.
-	 * @return array
+	 * Adds the product columns before the author column.
+	 *
+	 * @param array<string, string> $columns Columns.
+	 * @return array<string, string>
 	 */
-	public function manage_edit_columns( $columns ) {
-		$columns['orbis_product_price']      = __( 'Price', 'orbis-products' );
-		$columns['orbis_product_cost_price'] = __( 'Cost Price', 'orbis-products' );
-		$columns['orbis_product_deprecated'] = __( 'Deprecated', 'orbis-products' );
-		$columns['orbis_product_id']         = __( 'Orbis ID', 'orbis-products' );
+	private function edit_columns( array $columns ): array {
+		$product_columns = [
+			'orbis_product_price'      => \__( 'Price', 'orbis-products' ),
+			'orbis_product_cost_price' => \__( 'Cost Price', 'orbis-products' ),
+			'orbis_product_deprecated' => \__( 'Deprecated', 'orbis-products' ),
+			'orbis_product_id'         => \__( 'Orbis ID', 'orbis-products' ),
+		];
 
-		$new_columns = [];
+		$position = \array_search( 'author', \array_keys( $columns ), true );
 
-		foreach ( $columns as $name => $label ) {
-			if ( 'author' === $name ) {
-				$new_columns['orbis_product_price']      = $columns['orbis_product_price'];
-				$new_columns['orbis_product_cost_price'] = $columns['orbis_product_cost_price'];
-				$new_columns['orbis_product_deprecated'] = $columns['orbis_product_deprecated'];
-				$new_columns['orbis_product_id']         = $columns['orbis_product_id'];
-			}
-
-			$new_columns[ $name ] = $label;
+		if ( false === $position ) {
+			return $columns + $product_columns;
 		}
 
-		$columns = $new_columns;
-
-		return $columns;
+		return \array_slice( $columns, 0, $position, true ) + $product_columns + \array_slice( $columns, $position, null, true );
 	}
 
 	/**
-	 * Manage posts custom column.
+	 * Custom columns.
 	 *
-	 * @param string $column  Column.
+	 * @param string $column  Column name.
 	 * @param int    $post_id Post ID.
+	 * @return void
 	 */
-	public function manage_posts_custom_column( $column, $post_id ) {
+	private function custom_columns( string $column, int $post_id ): void {
 		switch ( $column ) {
 			case 'orbis_product_id':
-				$id = get_post_meta( $post_id, '_orbis_product_id', true );
+				$id = $this->get_meta( $post_id, '_orbis_product_id' );
 
-				if ( empty( $id ) ) {
-					echo '—';
-				} else {
-					$url = sprintf( 'http://orbis.pronamic.nl/projecten/details/%s/', $id );
-
-					printf( '<a href="%s" target="_blank">%s</a>', esc_attr( $url ), esc_html( $id ) );
-				}
+				echo \esc_html( '' === $id ? '—' : $id );
 
 				break;
 			case 'orbis_product_price':
-				$price = get_post_meta( $post_id, '_orbis_product_price', true );
-
-				if ( empty( $price ) ) {
-					echo '—';
-				} else {
-					$price = new Money( $price, 'EUR' );
-					echo esc_html( $price->format_i18n() );
-				}
+				echo \esc_html( $this->format_price( $post_id, '_orbis_product_price' ) );
 
 				break;
 			case 'orbis_product_cost_price':
-				$price = get_post_meta( $post_id, '_orbis_product_cost_price', true );
-
-				if ( empty( $price ) ) {
-					echo '—';
-				} else {
-					$price = new Money( $price, 'EUR' );
-					echo esc_html( $price->format_i18n() );
-				}
+				echo \esc_html( $this->format_price( $post_id, '_orbis_product_cost_price' ) );
 
 				break;
 			case 'orbis_product_deprecated':
-				$deprecated = get_post_meta( $post_id, '_orbis_product_deprecated', true );
+				$deprecated = $this->get_meta( $post_id, '_orbis_product_deprecated' );
 
-				if ( '' === $deprecated ) {
-					echo '—';
-				} else {
-					echo esc_html( $deprecated ? __( 'Yes', 'orbis-products' ) : __( 'No', 'orbis-products' ) );
-				}
+				echo \esc_html( '' === $deprecated ? \__( 'No', 'orbis-products' ) : \__( 'Yes', 'orbis-products' ) );
 
 				break;
 		}
+	}
+
+	/**
+	 * Format price.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $key     Meta key.
+	 * @return string
+	 */
+	private function format_price( int $post_id, string $key ): string {
+		$price = $this->get_meta( $post_id, $key );
+
+		if ( ! \is_numeric( $price ) ) {
+			return '—';
+		}
+
+		return ( new Money( $price, 'EUR' ) )->format_i18n();
 	}
 }

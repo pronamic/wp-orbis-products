@@ -1,0 +1,9 @@
+parameters:
+    level: max
+    paths:
+        - admin/
+        - psr-4/
+        - templates/
+        - orbis-products.php
+    universalObjectCratesClasses:
+        - wpdb

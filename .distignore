@@ -13,12 +13,15 @@
 
 phpcs.xml.dist
 
-/GEMINI.md
+phpstan.neon.dist
+
+/deploy.php
 
 /rector.php
 
 /build/
+/deploy/
 
 /node_modules/
 
-/examples/
+/state/

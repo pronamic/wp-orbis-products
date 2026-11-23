@@ -2,17 +2,19 @@
 	"core": null,
 	"config": {
 		"SAVEQUERIES": true,
-		"WP_DEBUG_LOG": true
+		"WP_DEBUG_LOG": true,
+		"WPLANG": "nl_NL"
 	},
+	"phpVersion": "8.3",
 	"plugins": [
-		"pronamic/wp-env-quick-login",
-		"https://downloads.wordpress.org/plugin/code-profiler.zip",
+		"solvebeam/solvebeam-quick-login-for-wp-env",
 		"https://downloads.wordpress.org/plugin/plugin-check.zip",
 		"https://downloads.wordpress.org/plugin/pronamic-client.zip",
 		"https://downloads.wordpress.org/plugin/query-monitor.zip"
 	],
 	"mappings": {
 		"wp-content/plugins/orbis-products-dev": "./",
-		"wp-content/plugins/orbis-products": "./build/stage-2/"
-	}
+		"wp-content/plugins/orbis-products": "./build/orbis-products/"
+	},
+	"testsEnvironment": false
 }

@@ -1,0 +1,11 @@
+# Exclude development and CI files from git archive exports.
+/.distignore        export-ignore
+/.editorconfig      export-ignore
+/.github/           export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.wp-env.json       export-ignore
+/deploy.php         export-ignore
+/phpcs.xml.dist     export-ignore
+/phpstan.neon.dist  export-ignore
+/rector.php         export-ignore
