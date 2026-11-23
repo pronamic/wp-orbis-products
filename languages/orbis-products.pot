@@ -9,13 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-23T10:00:48+00:00\n"
+"POT-Creation-Date: 2026-11-23T10:15:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: orbis-products\n"
 
 #. Plugin Name of the plugin
 #: orbis-products.php:11
+#: psr-4/AbilitiesController.php:60
 msgid "Orbis Products"
 msgstr ""
 
@@ -90,6 +91,128 @@ msgstr ""
 msgid "Cancel Note"
 msgstr ""
 
+#: psr-4/AbilitiesController.php:61
+msgid "Abilities for working with the products in Orbis, such as hosting packages and licenses that are sold as subscriptions."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:87
+msgid "HAL links of the product. Each link has an href and a title that describes what the link is for."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:95
+msgid "Orbis product ID, the same ID as product.id in the orbis-subscriptions/search ability."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:99
+msgid "WordPress post ID of the product."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:103
+msgid "Name of the product."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:107
+msgid "Currency of the price and the cost price."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:111
+msgid "Selling price per interval, the price the customer pays."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:115
+msgid "Cost price per interval, the purchase price Pronamic pays to the supplier. Null if not set."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:119
+msgid "Billing interval code: Y (yearly), 2Y (two yearly), 3Y (three yearly), Q (quarterly) or M (monthly)."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:123
+msgid "Human readable billing interval."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:127
+msgid "Whether subscriptions of this product renew automatically."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:131
+msgid "Whether the product is deprecated and no longer sold."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:135
+msgid "Twinfield article code, empty if not set."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:139
+msgid "Time per year included in the product, in seconds. Null if not set."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:143
+msgid "Description of the product."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:147
+msgid "Note about cancelling subscriptions of this product, for example at the supplier."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:151
+msgid "Internal notes about the product."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:168
+msgid "Search products"
+msgstr ""
+
+#: psr-4/AbilitiesController.php:169
+msgid "Searches the Orbis products and returns their details, including the selling price (price) and the purchase price (cost_price) per billing interval, so margins can be compared. Without a search term all products are returned, ordered by name. Subscriptions from orbis-subscriptions/search refer to these products by product.id."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:177
+msgid "Search term, matched against the product name."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:181
+msgid "Limit the results to deprecated (true) or not deprecated (false) products. Omit to return both."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:185
+msgid "Limit the results to products with this billing interval."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:190
+msgid "Maximum number of products to return."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:197
+msgid "Page of results to return."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:225
+msgid "Get product"
+msgstr ""
+
+#: psr-4/AbilitiesController.php:226
+msgid "Returns the details of a single Orbis product by its Orbis product ID (id of the search-products ability, or product.id of the orbis-subscriptions/search ability), including the selling price (price), the purchase price (cost_price), the billing interval, the description and the cancel note."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:233
+msgid "Orbis product ID."
+msgstr ""
+
+#. translators: %d: product ID
+#: psr-4/AbilitiesController.php:425
+#, php-format
+msgid "Product %d not found."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:476
+msgid "Orbis page of this product."
+msgstr ""
+
+#: psr-4/AbilitiesController.php:486
+msgid "External page with information about this product, for example at the supplier."
+msgstr ""
+
 #: psr-4/AdminController.php:41
 msgid "Yearly"
 msgstr ""
@@ -124,111 +247,111 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: psr-4/Plugin.php:87
-#: psr-4/Plugin.php:100
+#: psr-4/Plugin.php:89
+#: psr-4/Plugin.php:102
 msgid "Products"
 msgstr ""
 
-#: psr-4/Plugin.php:89
+#: psr-4/Plugin.php:91
 msgctxt "post type general name"
 msgid "Products"
 msgstr ""
 
-#: psr-4/Plugin.php:90
+#: psr-4/Plugin.php:92
 msgctxt "post type singular name"
 msgid "Product"
 msgstr ""
 
-#: psr-4/Plugin.php:91
-#: psr-4/Plugin.php:120
+#: psr-4/Plugin.php:93
+#: psr-4/Plugin.php:122
 msgid "Add New"
 msgstr ""
 
-#: psr-4/Plugin.php:92
+#: psr-4/Plugin.php:94
 msgid "Add New Product"
 msgstr ""
 
-#: psr-4/Plugin.php:93
+#: psr-4/Plugin.php:95
 msgid "Edit Product"
 msgstr ""
 
-#: psr-4/Plugin.php:94
+#: psr-4/Plugin.php:96
 msgid "New Product"
 msgstr ""
 
-#: psr-4/Plugin.php:95
+#: psr-4/Plugin.php:97
 msgid "View Product"
 msgstr ""
 
-#: psr-4/Plugin.php:96
+#: psr-4/Plugin.php:98
 msgid "Search Products"
 msgstr ""
 
-#: psr-4/Plugin.php:97
+#: psr-4/Plugin.php:99
 msgid "No products found"
 msgstr ""
 
-#: psr-4/Plugin.php:98
+#: psr-4/Plugin.php:100
 msgid "No products found in Trash"
 msgstr ""
 
-#: psr-4/Plugin.php:99
+#: psr-4/Plugin.php:101
 msgid "Parent Products:"
 msgstr ""
 
-#: psr-4/Plugin.php:108
+#: psr-4/Plugin.php:110
 msgctxt "slug"
 msgid "products"
 msgstr ""
 
-#: psr-4/Plugin.php:116
-#: psr-4/Plugin.php:129
+#: psr-4/Plugin.php:118
+#: psr-4/Plugin.php:131
 msgid "Product Changes"
 msgstr ""
 
-#: psr-4/Plugin.php:118
+#: psr-4/Plugin.php:120
 msgctxt "post type general name"
 msgid "Product Changes"
 msgstr ""
 
-#: psr-4/Plugin.php:119
+#: psr-4/Plugin.php:121
 msgctxt "post type singular name"
 msgid "Product Change"
 msgstr ""
 
-#: psr-4/Plugin.php:121
+#: psr-4/Plugin.php:123
 msgid "Add New Product Change"
 msgstr ""
 
-#: psr-4/Plugin.php:122
+#: psr-4/Plugin.php:124
 msgid "Edit Product Change"
 msgstr ""
 
-#: psr-4/Plugin.php:123
+#: psr-4/Plugin.php:125
 msgid "New Product Change"
 msgstr ""
 
-#: psr-4/Plugin.php:124
+#: psr-4/Plugin.php:126
 msgid "View Product Change"
 msgstr ""
 
-#: psr-4/Plugin.php:125
+#: psr-4/Plugin.php:127
 msgid "Search Product Changes"
 msgstr ""
 
-#: psr-4/Plugin.php:126
+#: psr-4/Plugin.php:128
 msgid "No product changes found"
 msgstr ""
 
-#: psr-4/Plugin.php:127
+#: psr-4/Plugin.php:129
 msgid "No product changes found in Trash"
 msgstr ""
 
-#: psr-4/Plugin.php:128
+#: psr-4/Plugin.php:130
 msgid "Parent Product Changes:"
 msgstr ""
 
-#: psr-4/Plugin.php:137
+#: psr-4/Plugin.php:139
 msgctxt "slug"
 msgid "product-changes"
 msgstr ""

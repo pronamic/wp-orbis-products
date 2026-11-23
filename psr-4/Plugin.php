@@ -52,6 +52,8 @@ final class Plugin {
 
 		new TemplateController();
 
+		( new AbilitiesController() )->setup();
+
 		if ( \is_admin() ) {
 			new AdminController();
 		}
